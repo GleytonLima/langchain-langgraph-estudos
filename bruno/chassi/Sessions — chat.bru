@@ -1,0 +1,29 @@
+meta {
+  name: Sessions — chat
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{chassiUrl}}/api/sessions/{{sessionId}}/chat
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "input": "Quero registrar uma despesa com Viagens"
+  }
+}
+
+script:post-response {
+  // se a resposta for um interrupt (HITL), salva o tool_call_id pendente p/ o resume
+  const body = res.getBody();
+  if (body && body.tool_calls && body.tool_calls.length) {
+    bru.setEnvVar("toolCallId", body.tool_calls[0].tool_call_id);
+  }
+}

@@ -1,0 +1,13 @@
+%% O loop ReAct (Reasoning + Acting). No create_agent: Thought+Action = nó `model`,
+%% Observation = nó `tools`, e o ciclo é a aresta model <-> tools.
+flowchart LR
+  Q["pergunta do<br/>usuário"] --> T
+  subgraph LOOP["loop ReAct"]
+    direction TB
+    T["Thought<br/>raciocina: o que fazer?"] --> ACT["Action<br/>chama uma tool"]
+    ACT --> OBS["Observation<br/>resultado da tool"]
+    OBS --> T
+  end
+  T -. "sem mais ações" .-> ANS["resposta final"]
+  classDef loop fill:#eef3f8,stroke:#0b3d59,stroke-width:2px,color:#1a1a1a
+  class T,ACT,OBS loop

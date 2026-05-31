@@ -1,0 +1,27 @@
+meta {
+  name: Resume
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{despesasUrl}}/resume
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "thread_id": "{{threadId}}",
+    "decisions": [
+      {
+        "tool_call_id": "{{toolCallId}}",
+        "action": "approve"
+      }
+    ]
+  }
+}

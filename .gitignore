@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.env
+
+.idea
+.logs
+.claude
+
+# Node / Angular
+node_modules/
+dist/
+out-tsc/
+.angular/
+
+# Infra
+infra/.env
+
+# Logs dos serviços
+.logs/
+
+# Cobertura de testes
+.coverage
+coverage/
+htmlcov/

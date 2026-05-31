@@ -1,0 +1,19 @@
+%% Diagrama de COMPONENTES (estrutura), não de sequência.
+flowchart TB
+  FE["Frontend (Angular)"]
+  CH["Chassi (FastAPI)<br/>proxy · registry · router_llm<br/>(zero domínio)"]
+  A["Agente A<br/>create_agent + tools + checkpointer"]
+  B["Agente B<br/>mesma fiação, outro domínio"]
+  DB[("Postgres<br/>estado por thread_id = session_id")]
+  CT["contracts (Pydantic)<br/>modelos + middleware compartilhados"]:::boundary
+
+  FE -->|"HTTP JSON — request/response, sem streaming"| CH
+  CH -->|"proxy /chat · /resume · /history"| A
+  CH -->|"proxy"| B
+  A --> DB
+  B --> DB
+  CT -. "tipa todo o tráfego" .-> CH
+  CT -.-> A
+  CT -.-> B
+
+  classDef boundary fill:#eef3f8,stroke:#0b3d59,stroke-width:2px,color:#1a1a1a

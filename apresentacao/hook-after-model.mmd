@@ -1,0 +1,6 @@
+%% Barrar no after_model (escolhido): o bloqueio é ANTES do card HITL.
+flowchart TB
+  a1["model propõe a tool"] --> a2["guard no after_model<br/>remove a tool call"]
+  a2 --> a3["card de aprovação<br/>NÃO aparece"]:::good
+  a3 --> a4["resposta direta ao usuário"]
+  classDef good fill:#d8f0dd,stroke:#2e7d32,stroke-width:2px,color:#1a1a1a

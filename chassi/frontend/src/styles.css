@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+}
+
+/*
+ * Tokens inspirados em bancos digitais brasileiros (laranja quente, azul
+ * institucional, formas arredondadas, grid 8px) — identidade própria do Chassi.
+ */
+:root {
+  /* Escala única: primário vibrante + derivados claros (mesma família) */
+  --brand: #ff6200;
+  --brand-hover: #e55800;
+  --brand-light: #fff3eb;
+  --brand-muted: #ffd9bf;
+  /* alias — mesmo tom primário (evita dois laranjas competindo) */
+  --brand-solid: var(--brand);
+  --brand-solid-hover: var(--brand-hover);
+
+  --trust: #003896;
+  --trust-hover: #002d78;
+  --trust-light: #e8f0fa;
+
+  --bg: #f4f4f6;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+
+  --border: #e4e4e8;
+  --border-strong: #c8c8d0;
+
+  --text: #252525;
+  --text-secondary: #565656;
+  --text-muted: #898989;
+  --text-inverse: #ffffff;
+
+  --success: #1a7f4b;
+  --success-hover: #156b3f;
+  --success-light: #e8f5ee;
+  --success-muted: #b8dfc8;
+
+  --sidebar-width: 288px;
+  --rail-width: 260px;
+  --main-padding: clamp(16px, 3vw, 40px);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(37, 37, 37, 0.06);
+  --shadow-md: 0 4px 16px rgba(37, 37, 37, 0.08);
+  --shadow-hover: 0 8px 24px rgba(37, 37, 37, 0.1);
+
+  --focus-ring: 0 0 0 2px rgba(0, 56, 150, 0.30);
+}
+
+/* Scrollbar discreta (chat, sidebar) */
+.scroll-subtle {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.scroll-subtle::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-subtle::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-subtle::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+.scroll-subtle::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

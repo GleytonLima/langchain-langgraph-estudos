@@ -1,0 +1,18 @@
+[project]
+name = "contracts"
+version = "0.1.0"
+description = "Protocolo Pydantic compartilhado entre chassi e agentes (DRY)"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.7"]
+
+# contracts.middleware (guards de fluxo) precisa de langchain/langgraph.
+# Opcional: só os AGENTES usam; o chassi importa apenas os modelos pydantic.
+[project.optional-dependencies]
+agents = ["langchain>=1.0", "langgraph>=1.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["contracts*"]

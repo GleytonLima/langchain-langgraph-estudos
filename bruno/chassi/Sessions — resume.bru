@@ -1,0 +1,26 @@
+meta {
+  name: Sessions — resume
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{chassiUrl}}/api/sessions/{{sessionId}}/resume
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "decisions": [
+      {
+        "tool_call_id": "{{toolCallId}}",
+        "action": "approve"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+%% Modelo BSP/Pregel: a execução avança em supersteps separados por uma barreira.
+%% Dentro de um superstep a ordem dos nós não importa -> resultado determinístico.
+flowchart LR
+  subgraph S1["superstep N"]
+    direction TB
+    a1["nós calculam<br/>(local)"] --> a2["trocam mensagens<br/>(canais de estado)"]
+  end
+  a2 --> BAR{{"barreira:<br/>espera todos"}}:::bar
+  BAR --> b1
+  subgraph S2["superstep N+1"]
+    direction TB
+    b1["nós calculam"] --> b2["trocam mensagens"]
+  end
+  b2 -. "repete até não haver mais updates" .-> done["estado final"]
+  classDef bar fill:#fde68a,stroke:#0b3d59,stroke-width:2px,color:#1a1a1a

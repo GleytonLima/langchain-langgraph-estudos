@@ -1,0 +1,12 @@
+%% Topologia FIEL ao grafo compilado por create_agent
+%% (agent.get_graph().draw_mermaid()), com rótulos legíveis.
+graph TD
+  start([__start__]) --> model["model<br/>(o LLM decide as tool calls)"]
+  model --> P["PreconditionMiddleware.after_model"]
+  P --> S["SequentialTurnMiddleware.after_model"]
+  S --> H["HumanInTheLoopMiddleware.after_model"]
+  H --> T["ToolCallLimitMiddleware.after_model"]
+  T -. "sem tool calls" .-> fim([__end__])
+  T -. "tool liberada" .-> tools["tools"]
+  T -. "re-chamar modelo" .-> model
+  tools -. "resultado volta" .-> model

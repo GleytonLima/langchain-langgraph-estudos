@@ -1,0 +1,9 @@
+%% Defesa em camadas contra alucinação, da mais fraca (soft) à mais forte (hard).
+flowchart TB
+  M["LLM propõe uma ação<br/>(pode estar alucinada)"] --> L1
+  L1["1 · system_prompt<br/>orienta — o modelo PODE ignorar  ·  soft"]:::soft --> L2
+  L2["2 · validação na tool<br/>checa o estado, erro se falta pré-requisito  ·  hard"]:::hard --> L3
+  L3["3 · middleware (gate)<br/>intercepta antes de a ação sair  ·  hard"]:::hard --> OK["ação executa"]:::ok
+  classDef soft fill:#fdf0d5,stroke:#b8860b,stroke-width:2px,stroke-dasharray:5 4,color:#1a1a1a
+  classDef hard fill:#d8f0dd,stroke:#2e7d32,stroke-width:2px,color:#1a1a1a
+  classDef ok fill:#eef3f8,stroke:#0b3d59,stroke-width:2px,color:#1a1a1a

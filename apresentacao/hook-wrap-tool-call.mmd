@@ -1,0 +1,7 @@
+%% Barrar no wrap_tool_call: o bloqueio é DEPOIS do card HITL (aprovação em vão).
+flowchart TB
+  b1["model propõe a tool"] --> b2["card de aprovação<br/>aparece"]
+  b2 --> b3["usuário aprova"]
+  b3 --> b4["wrap_tool_call bloqueia<br/>na hora de executar"]
+  b4 --> b5["ação não roda —<br/>aprovação foi em vão"]:::bad
+  classDef bad fill:#fde0e0,stroke:#c62828,stroke-width:2px,color:#1a1a1a

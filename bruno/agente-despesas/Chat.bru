@@ -1,0 +1,38 @@
+meta {
+  name: Chat
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{despesasUrl}}/chat
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "thread_id": "{{threadId}}",
+    "input": "abrir um relatório de viagem chamado Viagem SP"
+  }
+}
+
+script:pre-request {
+  // Novo thread por conversa, p/ não acumular estado de testes anteriores.
+  // Gerado UMA vez aqui e reusado pelo resume — não use {{$guid}} inline no corpo,
+  // que geraria ids DIFERENTES no chat e no resume (quebrando o par).
+  const { randomUUID } = require('crypto');
+  bru.setEnvVar("threadId", "t-" + randomUUID());
+}
+
+script:post-response {
+  // se a resposta for um interrupt (HITL), salva o tool_call_id pendente p/ o resume
+  const body = res.getBody();
+  if (body && body.tool_calls && body.tool_calls.length) {
+    bru.setEnvVar("toolCallId", body.tool_calls[0].tool_call_id);
+  }
+}

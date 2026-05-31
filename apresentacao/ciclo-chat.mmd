@@ -1,0 +1,23 @@
+%% Ciclo de um /chat com HITL — versão condensada do docs/sequencia.md.
+sequenceDiagram
+  autonumber
+  actor U as Usuário
+  participant F as Frontend
+  participant C as Chassi
+  participant A as Agente
+  participant CP as Checkpointer (Postgres)
+
+  U->>F: mensagem
+  F->>C: POST /sessions/{id}/chat
+  C->>A: POST /chat {thread_id, input}
+  A->>CP: carrega estado (thread_id)
+  A->>A: model + guards
+  Note over A: escrita sensível → HITL interrompe ANTES da tool
+  A-->>C: status=interrupt (tool_calls, field_options)
+  C-->>F: card de aprovação
+  U->>F: aprova (ou edita os args)
+  F->>C: POST /sessions/{id}/resume
+  C->>A: POST /resume {decisions}
+  A->>CP: a tool executa e persiste o estado
+  A-->>C: status=final (text, suggestions)
+  C-->>F: resposta

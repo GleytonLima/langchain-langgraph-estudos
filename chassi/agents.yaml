@@ -1,0 +1,8 @@
+# Registry estático de agentes. Outros times adicionam o seu agente aqui.
+# O chassi lê este arquivo, busca /manifest de cada um e usa as capabilities
+# para o roteamento (qual agente responde) e para o proxy.
+agents:
+  - id: agente-despesas
+    url: http://localhost:8101
+  - id: agente-suporte
+    url: http://localhost:8102

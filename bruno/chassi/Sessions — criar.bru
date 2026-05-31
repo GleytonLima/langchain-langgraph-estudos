@@ -1,0 +1,29 @@
+meta {
+  name: Sessions — criar
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{chassiUrl}}/api/sessions
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "agent_id": "agente-despesas"
+  }
+}
+
+script:post-response {
+  // salva o id da sessão criada no ambiente p/ as próximas requests
+  const body = res.getBody();
+  if (body && body.id) {
+    bru.setEnvVar("sessionId", body.id);
+  }
+}
